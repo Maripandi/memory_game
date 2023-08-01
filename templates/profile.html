@@ -1,0 +1,26 @@
+{% extends 'base/main.html' %}
+{% block nav %}
+    {% include 'nav/user_nav.html' %}
+{% endblock nav %}
+
+{% block msg %}
+    {% if msg %}
+    <div class="container text-center">
+        <h1 class="display-6 text{{ msg.0 }}">{{ msg.1 }}</h1>
+    </div>
+    
+    {% endif %}
+{% endblock msg %}
+
+{% block body %}
+
+<div class="container-fluid">
+    {% include 'base/fliphead.html' %}
+</div>
+
+<div class="container">
+    <h1 class="display-3">Profile Settings</h1>
+   
+</div>
+
+{% endblock body %}

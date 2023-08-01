@@ -1,0 +1,1 @@
+web: gunicorn memory_game.wsgi

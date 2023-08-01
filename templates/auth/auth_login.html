@@ -1,0 +1,96 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block nav %}
+    {% include 'nav/nav.html' %}
+{% endblock nav %}
+
+{% block msg %}
+    {% if msg %}
+        <div class="container text-center">
+            <h1 class="display-6 text-{{ msg.0 }}">{{ msg.1 }}</h1>
+        </div>
+
+    {% endif %}
+
+{% endblock msg %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="padding:100px">
+        <div class="col-4  text-warning text-center bg-dark" >
+                <div class="row justify-content-center align-items-center" id="formLogin">
+                    <h1 class="display-3">Login</h1>
+                    <div class="col-12">
+                        {{ logform.username }}
+                        <div id="spanUsername"></div><br>
+                    </div>
+                    <div class="col-12">
+                        {{ logform.password }}
+                        <br>
+                    </div>
+                    
+                    <div class="col-6">
+                        <button id="btnLogin" class="btn btn-outline-warning">&nbsp; Login &nbsp;</button>
+                    </div>
+                    <div class="col-6" >
+                        <button id="btnRegister" class="btn btn-outline-warning">Register</button>
+                    </div>
+                        <hr class="text-dark"><br>
+                        <script>
+                            $(document).ready(function(){
+                                $('#btnRegister').click(function(){
+                                    $.ajax({
+                                        url:'/auth-register',
+                                        type:'POST',
+                                        success:function(response){
+                                            $('#formLogin').html(response);
+                                        }
+                                    })
+                                });
+                            });
+                        </script>
+                        <script>
+                            $(document).ready(function(){
+                                $('#btnLogin').hover(function(){
+                                    var get_username = $('#id_username').val();
+                                    var get_password = $('#id_password').val();
+                                    $.ajax({
+                                        url:'/login-validation',
+                                        type:'POST',
+                                        data:JSON.stringify({
+                                            username : get_username,
+                                            password : get_password,
+                                        }),
+                                        success:function(response){
+                                            $('#spanUsername').html(response);
+                                        }
+                                    })
+                                });
+                                $('#btnLogin').click(function(){
+                                    var user = $('#spanusername_and_password');
+                                    if (user.hasClass('text-info')){
+                                        var get_username = $('#id_username').val();
+                                        var get_password = $('#id_password').val();
+                                        $.ajax({
+                                            url:'/do-login',
+                                            type:'POST',
+                                            data:JSON.stringify({
+                                                username : get_username,
+                                                password : get_password,
+                                            }),
+                                            success:function(response){
+                                                $('#formLogin').html(response);
+                                            }
+                                        })
+                                    }
+                                });
+                            });
+                        </script>
+                </div>
+        </div>    
+    </div>
+</div>
+
+
+{% endblock body %}

@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand navbar-light bg-dark">
+    <div class="container">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-2">
+                    <h1 class="display-6 text-light float-start"><i class="bi bi-person-circle"></i> {{ user.username | capfirst }}</h1>
+                </div>
+                <div class="col-8">   
+                    <div class="nav justify-content-center ">
+                        <a class="nav-item nav-link text-warning" href="/"><i class="bi bi-house"></i> Home</a>
+                        <a class="nav-item nav-link text-warning" href="/profile"><i class="bi bi-person-gear"></i>Profile</a>
+                        <a class="nav-item nav-link text-warning" href="/game"><i class="bi bi-controller"></i> Game</a>
+                    </div>
+                </div>
+                <div class="col-2">            
+                    <a type="button" name="" id="" href="/logout" class="btn btn-outline-warning float-end"><i class="bi bi-box-arrow-right"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</nav>

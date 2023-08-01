@@ -1,0 +1,11 @@
+<div class="container">
+    <h1 class="display-6 text-{{ msg.0 }}">{{ msg.1 }}</h1>
+    {% if msg.0 == 'danger' %}
+      <a type="button" href="/" class="btn btn-warning"><i class="bi bi-person-lock"></i> Back to Login</a>
+    {% elif msg.0 == 'info' %}
+      <a type="button" href="/" class="btn btn-warning"><i class="bi bi-person-lock"></i> Login Now</a>
+    {% else %}
+      <a type="button" href="/home" class="btn btn-warning"><i class="bi bi-house-up-fill"></i> Go to Home</a>
+    {% endif %}
+    <hr class="text-dark">
+</div>

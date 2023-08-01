@@ -1,0 +1,109 @@
+
+    <div class="row justify-content-center align-items-center" id="formRegister">
+        <h1 class="display-3">Register</h1>
+        <div class="col-12">
+            {{ regform.username }}
+            <div id="spanUsername"></div><br>
+        </div>
+        <div class="col-12">
+            {{ regform.password1 }}
+            <div id="spanPassword1"></div><br>
+        </div>
+        <div class="col-12">
+            {{ regform.password2 }}
+            <div id="spanPassword2"></div><br>
+        </div>
+        <div class="col-12">
+            {{ regform.email }}
+            <div id="spanEmail"></div><br>
+        </div>
+        <div class="col-4">
+            <button id="btnRegister" class="btn btn-outline-warning">Register</button>
+        </div>
+        <div class="col-4" id="divRegister">
+
+        </div>
+        <div class="col-4" >
+            <a id="btnLogin" href="/" class="btn btn-outline-warning">Login</a>
+        </div>
+            <hr class="text-dark"><br>
+            <script>
+                $(document).ready(function(){
+                    $('#btnRegister').click(function()
+                    {
+                        var get_username = $('#id_username').val();
+                        var get_type = "username";
+                        $.ajax({
+                            url:'/register-validation',
+                            type:'POST',
+                            data:JSON.stringify({
+                                value : get_username,
+                                type : get_type,
+                            }),
+                            success:function(response){
+                                $('#spanUsername').html(response);
+                            }
+                        })
+                    });
+                    $('#btnRegister').click(function()
+                    {
+                        var get_password1 = $('#id_password1').val();
+                        var get_type = "password1"
+                        $.ajax({
+                            url:'/register-validation',
+                            type:'POST',
+                            data:JSON.stringify({
+                                value : get_password1,
+                                type : get_type,
+                            }),
+                            success:function(response){
+                                $('#spanPassword1').html(response);
+                            }
+                        })
+                    });
+                    $('#btnRegister').click(function()
+                    {
+                        var get_password2 = $('#id_password2').val();
+                        var get_type = "password2"
+                        $.ajax({
+                            url:'/register-validation',
+                            type:'POST',
+                            data:JSON.stringify({
+                                value : get_password2,
+                                type : get_type,
+                            }),
+                            success:function(response){
+                                $('#spanPassword2').html(response);
+                            }
+                        })
+                    });
+                    $('#btnRegister').click(function(){
+                        var username = $('#spanusername');
+                        var password = $('#spanpassword');
+                        var password_match = $('#spanpassword_match');
+
+                        if (username.hasClass('text-success')){
+                            if(password.hasClass('text-success')){
+                                if(password_match.hasClass('text-success')){
+                                    var get_username = $('#id_username').val();
+                                    var get_password1 = $('#id_password1').val();
+                                    var get_email = $('#id_email').val();
+                                    $.ajax({
+                                        url:'/do-register',
+                                        type:'POST',
+                                        data:JSON.stringify({
+                                            username : get_username,
+                                            password : get_password1,
+                                            email : get_email
+                                        }),
+                                        success:function(response){
+                                            $('#formRegister').html(response);
+                                        }
+                                    })
+                                }
+                            }
+                        }
+                     });
+                });
+            </script>
+    </div>

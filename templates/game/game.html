@@ -1,0 +1,75 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block nav %}
+    {% include 'nav/user_nav.html' %}
+{% endblock nav %}
+
+{% block msg %}
+    {% if msg %}
+    <div class="container text-center">
+        <h1 class="display-6 text{{ msg.0 }}">{{ msg.1 }}</h1>
+    </div>
+    
+    {% endif %}
+{% endblock msg %}
+
+{% block body %}
+<div class="container-fluid">
+    {% include 'base/fliphead.html' %}
+</div>
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center" style="height:570px;">
+        <div style="background:teal;" class="col-2 text-light px-0">
+            <h1 class="display-6 bg-light text-info">Result</h1>
+            <h1 class="display-6 text-center" id="successMsg"> </h1>
+        </div>
+        <div class="col-8 bg-dark px-4">
+            <div class="row justify-content-center">
+                {% for k,v in df.iterrows %}
+                    <div class="col-3 game-flip" id="{{ v.0 }}">
+                        <div class="card front text-center border-info">
+                            <div class="card-body bg-dark">
+                                <h1 class="display-1 text-info"><i class="bi bi-question-circle-fill"></i></h1>
+                            </div>
+                        </div>
+                        <div class="card back text-center border-info">
+                            <div class="card-body bg-light">
+                                <h1 class="display-1"><i class="bi bi-{{ v.0 | slice:"1:" }}"></i></h1>
+                            </div>
+                        </div> 
+                    </div>
+                {% endfor %}
+                <div id="winGame" style="padding: 10px;"></div>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $("div.game-flip").flip({
+                        trigger: 'click',
+                        });
+                    $('div.game-flip').click(function(){
+                        var id_value = ($(this).attr('id'));
+                        $.ajax({
+                            url:'game-validator',
+                            type:'POST',
+                            data:JSON.stringify({
+                                value : id_value,
+                            }),
+                            success:function(response){
+                                $('#successMsg').html(response);
+                            }
+                        })
+                    })
+                });
+            </script> 
+        </div>
+        <div style="background:teal;" class="col-2 text-info px-0">
+            <h1 class="display-6 bg-light text-info">&nbsp;Leader Borad</h1>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock body %}

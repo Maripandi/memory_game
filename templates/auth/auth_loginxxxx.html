@@ -1,0 +1,55 @@
+<div class="row justify-content-center align-items-center" id="formLogin">
+    <h1 class="display-3">Login</h1>
+    <div class="col-12">
+        {{ logform.username }}<br>
+    </div>
+    <div class="col-12">
+        {{ logform.password }}<br>
+    </div>
+    <div class="col-6" >
+        <button id="btnRegister" class="btn btn-outline-warning">Register</button>
+    </div>
+    <div class="col-6">
+        <button id="btnLogin" class="btn btn-outline-warning">Login</button>
+    </div>
+        <hr class="text-dark"><br>
+    
+        <script>
+            $(document).ready(function(){
+                $('#btnRegister').click(function(){
+                    $.ajax({
+                        url:'/auth-register',
+                        type:'POST',
+                        success:function(response){
+                            $('#formLogin').html(response);
+                        }
+                    })
+        
+                });
+            });
+            
+        </script>
+        <script>
+            $(document).ready(function(){
+                $('#btnLogin').click(function(){
+                    var get_username = $('#id_username').val();
+                    var get_password = $('#id_password').val();
+                    $.ajax({
+                        url:'/login-validation',
+                        type:'POST',
+                        data:JSON.stringify({
+                            username : get_username,
+                            password : get_password,
+                        }),
+                        success:function(response){
+                            $('#formLogin').html(response);
+                        }
+                    })
+                });
+            });
+        
+        </script>
+        
+
+</div>
+

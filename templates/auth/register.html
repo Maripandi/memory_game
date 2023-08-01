@@ -1,0 +1,50 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block nav %}
+<div class="container-fluid bg-dark" >
+    <h1 class="display-5 text-center text-warning">Login or Register</h1>
+    
+</div>
+
+{% endblock nav %}
+
+{% block msg %}
+
+{% endblock msg %}
+
+
+{% block body %}
+<div class="container">
+
+        <div class="row justify-content-center align-items-center" style="padding:100px">
+            <div class="col-4  text-warning text-center bg-dark" >
+                <h1 class="display-1">Register</h1>
+                <div class="row justify-content-center align-items-center">
+                    <form action="registerValidation" method="post">
+                        {% csrf_token %}
+                        {{ form.username }}<br>
+                        <span id="userNameSpan"></span>
+                        {{ form.password1 }}<br>
+                        <span id="passwordSpan1"></span>
+                        {{ form.password2 }}<br>
+                        <span id="passwordSpan2"></span>
+                        {{ form.email }}<br>
+                        <span id="emailSpan"></span>
+                        <a type="button" href = "/" class="btn btn-outline-warning">Login</a>
+                        <button type="submit" class="btn btn-outline-warning">Register</button>
+                        <br><br>
+                    </form>
+                    
+                    
+                </div>
+             
+
+        </div>
+
+ 
+
+
+
+</div>
+
+{% endblock body %}

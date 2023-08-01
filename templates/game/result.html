@@ -1,0 +1,66 @@
+{% load static %}
+
+{% if res.0 == 'match' %}
+    <h1 class="display-6"><i class="bi bi-check-circle-fill"></i> Match <hr class="text-light"> {{ res.1 }}</h1>
+    <audio id="buzzer" src="{% static 'sounds/match.mp3' %}" type="audio/mp3"></audio>
+
+    <script>
+        $(document).ready(function(){
+            $('#1{{ res.1 }}').hide();
+            $('#2{{ res.2 }}').hide();
+            $('#buzzer').get(0).play();
+        });
+    </script>
+
+{% elif res.0 == 'did not match' %}
+    <h1 class="display-6 text-danger">
+        <i class="bi bi-shield-fill-x"></i>
+        <b> Did Not Match <hr class="text-light"> {{ res.1 }} <br> ----- <br> {{ res.2 }}</b>
+    </h1>
+
+    <audio id="buzzer" src="{% static 'sounds/not_match.mp3' %}" type="audio/mp3"></audio>
+
+    <script>
+        $(document).ready(function(){
+            $('div.game-flip').flip(false);
+            
+            $('#buzzer').get(0).play();
+
+
+
+        });
+    </script>
+{% elif res.0 == 'Dont click same card again' %}
+    <h1 class="display-6 text-warning"><i class="bi bi-exclamation-triangle-fill"></i> Warning <hr class="text-light">{{res.0 }}</h1>
+    <audio id="buzzer" src="{% static 'sounds/warning.mp3' %}" type="audio/mp3"></audio>
+    <script>
+        $(document).ready(function(){
+            $('#buzzer').get(0).play();
+        });
+    </script>
+
+{% elif res.0 == 'end' %}
+<h1 class="display-6"><i class="bi bi-check-circle-fill"></i> Match <hr class="text-light"> {{ res.1 }}</h1>
+<audio id="buzzer" src="{% static 'sounds/win.mp3' %}" type="audio/mp3"></audio>
+<script>
+    $(document).ready(function(){
+        $('#1{{ res.1 }}').hide();
+        $('#2{{ res.2 }}').hide();
+        {% comment %} $('#winGame').html('<h1 class="display-3 text-center text-light">Win</h1>'); {% endcomment %}
+
+        $('#winGame').html('<img src="{% static 'images/success.gif' %}" class="img-fluid rounded-top" alt="win">');
+        
+        $('#buzzer').get(0).play();
+    });
+</script>
+
+
+{% else %}
+<script>
+    $(document).ready(function(){
+        
+    })
+</script>
+
+{% endif %}
+

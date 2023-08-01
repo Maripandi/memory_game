@@ -1,0 +1,27 @@
+
+{% if msg.0 == 'danger' %}
+    <span class="text-{{ msg.0 }}"><b>X</b> {{ msg.1 }} : {{ msg.2 }}</span>
+{% elif msg.0 == 'primary' %}
+<script>
+    $(document).ready(function(){
+        $('#btnRegister').click();
+        alert('If you does not have account please register')
+    });
+</script>
+
+{% else %}
+    <span id="span{{ msg.1 }}" class="text-{{ msg.0 }}"> {{ msg.1 }} : {{ msg.2 }} <i class="bi bi-check-circle-fill"></i></span>
+{% endif %} 
+
+{% comment %} <script>
+    $(document).ready(function(){
+        var {{ msg.1 }} = "{{ msg.2 }}"
+    })
+    
+</script> {% endcomment %}
+
+{% comment %} {% if color == 'danger' %}
+    <span class="text-{{ msg.0 }}"><b>X</b> {{ msg.1 }} </span>
+{% else %}
+    <span id="{{ id }}" class="text-{{ color }}"> {{ msg }} <i class="bi bi-check-circle-fill"></i></span>
+{% endif %} {% endcomment %}

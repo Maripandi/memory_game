@@ -1,0 +1,55 @@
+{% extends 'base/main.html' %}
+{% block nav %}
+    {% include 'nav/user_nav.html' %}
+{% endblock nav %}
+
+{% block msg %}
+    {% if msg %}
+    <div class="container text-center">
+        <h1 class="display-6 text{{ msg.0 }}">{{ msg.1 }}</h1>
+    </div>
+    
+    {% endif %}
+{% endblock msg %}
+
+{% block body %}
+
+<div class="container-fluid">
+    {% include 'base/fliphead.html' %}
+</div>
+
+<div class="container">
+    <h1 class="display-3">Leader Board</h1>
+    <div class="table-responsive">
+        <table class="table table-striped
+        table-hover	
+        table-borderless
+        table-dark
+        align-middle">
+            <thead class="text-warning">
+                <tr>
+                    <th>Rank</th>
+                    <th>User</th>
+                    <th>Score</th>
+                    <th>Dated</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for l in leaders %}
+                    <tr class="table-light" >
+                        <td scope="row">{{ forloop.counter }}</td>
+                        <td>{{ l.user.username }}</td>
+                        <td>{{ l.score }}</td>
+                        <td>{{ l.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+                <tfoot>
+                    
+                </tfoot>
+        </table>
+    </div>
+</div>
+
+{% endblock body %}

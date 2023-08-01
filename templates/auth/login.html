@@ -1,0 +1,42 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block nav %}
+<div class="container-fluid bg-dark" >
+    <h1 class="display-5 text-center text-warning">Login or Register</h1>
+    
+</div>
+
+{% endblock nav %}
+
+{% block msg %}
+    {% if msg %}
+        <div class="container text-center">
+            <h1 class="display-6 text-{{ msg.0 }}">{{ msg.1 }}</h1>
+        </div>
+
+    {% endif %}
+
+{% endblock msg %}
+
+
+{% block body %}
+
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="padding:100px">
+        <div class="col-4  text-warning text-center bg-dark" >
+            <h1 class="display-3">Login</h1>
+            <div class="row justify-content-center align-items-center">
+                <form action="/" method="post">
+                    {% csrf_token %}
+                    {{ form.username }}<br>
+                    {{ form.password }}<br>
+                    <a type="button" href = "/register" class="btn btn-outline-warning">Register</a>
+                    <button type="submit" class="btn btn-outline-warning">Login</button>
+                    <br><br>
+                </form>    
+            </div>
+    </div>
+</div>
+
+
+{% endblock body %}
